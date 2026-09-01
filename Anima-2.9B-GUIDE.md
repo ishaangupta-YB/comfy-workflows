@@ -30,3 +30,22 @@ They live under `ComfyUI/models/` in `diffusion_models/`, `text_encoders/`, and 
 
 ---
 
+## 2. How it works (the pipeline)
+
+```
+  your prompt ──► CLIPLoader (Qwen3-0.6B) ──► CLIPTextEncode (positive) ─┐
+  negative    ──► CLIPLoader (Qwen3-0.6B) ──► CLIPTextEncode (negative) ─┤
+                                                                         ▼
+  EmptyLatentImage (W×H) ─────────────────────────────────────► KSampler ──► VAEDecode (Qwen VAE) ──► image
+                                       UNETLoader (Anima DiT) ──►    ▲
+                                                                  (sampler, steps, cfg, seed)
+```
+
+1. **Text encoder (Qwen3-0.6B)** turns your positive and negative prompts into conditioning vectors.
+2. **KSampler** starts from random noise (seeded) in a latent space and, over N steps, denoises it — the **DiT** predicts what to remove at each step, steered toward the positive prompt and away from the negative (strength = **CFG**).
+3. **VAE** decodes the final latent into the actual pixels.
+
+Because the text encoder is a tiny 0.6B model (not the ~5 GB T5-XXL used by many image models), total memory is low (~7 GB in use), so a 24 GB Mac has plenty of headroom.
+
+---
+
