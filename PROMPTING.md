@@ -27,3 +27,34 @@ The `llm_adapter` is the most fragile component in the stack. Official finetunin
 
 ---
 
+## 2. Tag order
+
+A hard structure, not a suggestion. The captions were written this way.
+
+```
+[quality] [meta] [year/period] [safety]  [1girl/1boy/1other]  [character]  [series]  [@artist]  [general]
+```
+
+Order within a section does not matter. Order across sections does.
+
+Official worked example:
+
+```
+year 2025, newest, normal quality, score_5, highres, safe,
+1girl,
+oomuro sakurako,
+yuru yuri,
+@nnn yryr,
+smile, brown hair, hat, solo, fur-trimmed gloves, open mouth, long hair,
+gift box, fang, skirt, red gloves, blunt bangs, one eye closed, shirt,
+santa costume, red hat, skin fang, white background, holding bag,
+fur trim, simple background, brown skirt, bag, looking at viewer,
+santa hat, ;d, red shirt, box, gift, holding, red capelet, capelet
+```
+
+Lowercase. Spaces, not underscores. Score tags are the one exception and keep their underscore.
+
+Where Danbooru and Gelbooru disagree on a tag name, use the Gelbooru version.
+
+---
+
