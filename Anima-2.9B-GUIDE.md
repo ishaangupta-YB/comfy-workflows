@@ -49,3 +49,16 @@ Because the text encoder is a tiny 0.6B model (not the ~5 GB T5-XXL used by many
 
 ---
 
+## 3. What to expect — capabilities & limits
+
+**It is good at:** anime / illustration / painterly non-photoreal imagery across a wide range of substyles (Ghibli-ish, retro-90s cel, shonen/shoujo, cyberpunk, watercolor, ukiyo-e, dark fantasy, mecha, chibi, cartoon, etc.), landscapes and environments, single-character portraits, mood/lighting.
+
+**It is weak at (by design or by scale):**
+- **Photorealism** — intentionally. It is a non-photoreal model; don't fight it.
+- **Legible text** in images — expect garbled or approximate lettering. Don't rely on it for signage/logos.
+- **High resolution** — it's trained around ~1 MP. Pushing far past that degrades coherence.
+- **Complex multi-subject scenes / hands** — improves with explicit prompting ("both hands clearly visible and correct", specify subject counts like `2girls`/`4girls`) but remains the hardest case, as with all diffusion models.
+- It's a **preview** checkpoint — details and consistency are rougher than a finished release.
+
+---
+
