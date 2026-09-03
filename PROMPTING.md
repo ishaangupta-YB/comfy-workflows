@@ -58,3 +58,45 @@ Where Danbooru and Gelbooru disagree on a tag name, use the Gelbooru version.
 
 ---
 
+## 3. Each section
+
+### Quality tags
+
+Two independent systems. Use either, both, or neither.
+
+| System | Values |
+|---|---|
+| Human score | `masterpiece`, `best quality`, `good quality`, `normal quality`, `low quality`, `worst quality` |
+| PonyV7 aesthetic model | `score_9` down to `score_1` |
+
+**The 2.9B difference that matters:** its training captions contained **no score tags at all**. The card says you can still use them, which is true only because the frozen original 28 blocks still carry them. The 12 new blocks have never seen one. Expect weaker and less predictable behavior than on Base. I would drop score tags from 2.9B prompts entirely and use the human-score words.
+
+On Anima-Aesthetic the card recommends dropping `score_*` from both positive and negative, because the model is already aesthetic-tuned and pushing harder sends it into slop.
+
+### Time period tags
+
+Underrated, and the strongest single lever on art style.
+
+```
+year 2025, year 2024, year 2023, ...
+newest, recent, mid, early, old
+```
+
+`old` gets 2000s anime aesthetics. `newest` gets current Pixiv. If your output looks dated and you did not ask for that, you left the period tag off and the model averaged twenty years of art.
+
+### Meta tags
+
+```
+highres, absurdres, anime screenshot, anime coloring, official art, jpeg artifacts
+```
+
+`anime screenshot` plus `anime coloring` is the pair that produces a TV-anime look instead of an illustration look. Community LoRA trainers deliberately tag screencaps this way because Anima holds the style well inside those two tags. Directly relevant if you are training on anime frames.
+
+### Safety tags
+
+```
+safe, sensitive, nsfw, explicit
+```
+
+`safe` in positive, the other three in negative. The card lists unwanted content as a known limitation and names safety tags as the mitigation. This matters most with short prompts, because a short prompt leaves the model free to fill in.
+
