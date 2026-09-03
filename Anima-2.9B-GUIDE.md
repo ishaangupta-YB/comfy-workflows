@@ -62,3 +62,27 @@ Because the text encoder is a tiny 0.6B model (not the ~5 GB T5-XXL used by many
 
 ---
 
+## 4. Prompting
+
+Anima uses Anima-Base's captioning, which is a **mix of Danbooru tags and natural language** — both work, and you can combine them.
+
+**Tag order that works best:**
+```
+[quality / meta / year / safety]  [1girl / 1boy / 2girls ...]  [character]  [series]  [artist]  [general tags & natural language]
+```
+
+**Rules that actually matter (verified):**
+- **Use LONG prompts.** Short prompts produce noticeably blander, mushier backgrounds. Describe the scene, lighting, mood, and details generously. (Every prompt in the test set is 40–80 words for this reason.)
+- **Artist tags need a leading `@`** (e.g. `@artistname`) or the effect barely registers.
+- **Score tags have no effect.** `score_9`, `score_7`, etc. were **not** in this model's training captions — they're inert. Don't include them (they were removed from this workflow's defaults).
+- **Style is best summoned by describing the style**, e.g. `studio ghibli style, hand-painted watercolor backgrounds, ...` or `1990s retro anime style, cel shaded, film grain`. Named-franchise tags may or may not be trained; a style *description* is reliable.
+- **`safe` / `sensitive` / `explicit`** are meta/safety tags from the Danbooru vocabulary; keep `safe` for SFW.
+
+**Negative prompt** (a solid general-purpose default, already in the workflow):
+```
+lowres, worst quality, bad anatomy, bad hands, extra digits, fewer digits, jpeg artifacts, signature, watermark, username, blurry
+```
+Add targeted terms to suppress recurring artifacts you actually see.
+
+---
+
