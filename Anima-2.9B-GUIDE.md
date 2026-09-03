@@ -86,3 +86,18 @@ Add targeted terms to suppress recurring artifacts you actually see.
 
 ---
 
+## 5. Settings
+
+| Setting | Default here | Range / notes |
+|---|---|---|
+| **Sampler** | `er_sde` | The base author's own pick. `euler` is a fine alternative to A/B. |
+| **Scheduler** | `simple` | `sgm_uniform`, `beta`, `normal` are worth comparing. |
+| **Steps** | 28 (iteration) / **50 (finals)** | Model card suggests 30–50. 28 is clean; more steps = more convergence, slower. |
+| **CFG** | 4.0 | Model card 3.5–5. ↑ = stronger prompt adherence but risks oversaturation/contrast. <3.5 washes out. |
+| **Seed** | any (fix it while testing) | Fix the seed to make *prompt/setting* the only variable. |
+| **Weight dtype** | `default` (bf16) | Best quality. **Do not** use the int8 build on Mac (see §8). |
+
+**Measured speed (M5 Pro, 24 GB, MPS):** ~**7 s/it**, so a 28-step ~1 MP image ≈ **3.5 min** (first run adds ~30–60 s for model load + MPS graph compile). A 50-step finals image ≈ **6 min**.
+
+---
+
