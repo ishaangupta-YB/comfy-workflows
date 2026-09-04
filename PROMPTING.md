@@ -100,3 +100,17 @@ safe, sensitive, nsfw, explicit
 
 `safe` in positive, the other three in negative. The card lists unwanted content as a known limitation and names safety tags as the mitigation. This matters most with short prompts, because a short prompt leaves the model free to fill in.
 
+### Artist tags
+
+**Prefix with `@` or the effect is weak.** The card is emphatic. `@nnn yryr`, not `nnn yryr`.
+
+On 2.9B this is the main fix for flatness. The new blocks push toward glossy saturated commercial illustration with thin shadows. An artist tag pulls it back toward a specific look. In a published CFG sweep, raising CFG from 4 to 6 did **not** restore the shading, while a single artist tag changed line weight, ornament detail and composition outright.
+
+### Character and series
+
+**Always pair a character tag with its series tag.** Names collide across franchises and the model confuses them without the copyright tag. Both cards say this.
+
+For multiple characters, name each **and describe their appearance**. Anima reliably places attributes in the positions you specify and just as reliably gets the identities wrong if you only give names.
+
+---
+
