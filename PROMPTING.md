@@ -114,3 +114,38 @@ For multiple characters, name each **and describe their appearance**. Anima reli
 
 ---
 
+## 4. Natural language mode
+
+Pure prose, pure tags, or any mix, in any order.
+
+- Standard English capitalization for character and series names. `Fern from Sousou no Frieren`.
+- At least two sentences. Very short prose gives unexpected results.
+- Quality and artist tags can lead a prose prompt: `masterpiece, best quality, @big chungus. An anime girl with medium-length blonde hair is...`
+- Name a character, then describe their appearance. Essential for multi-character scenes.
+
+```
+Digital artwork of Fern from Sousou no Frieren, with long purple hair and
+purple eyes, wearing a black coat over a white dress with puffy sleeves...
+```
+
+### Dataset tags, an obscure feature almost nobody uses
+
+Anima-Base was additionally trained on LAION-POP (ye-pop) and DeviantArt, both photo-filtered. Those captions carried a dataset tag on its own line, optionally followed by a title line. You can invoke that mode:
+
+```
+deviantart
+Flame
+Digital painting of a fiery dragon with glowing yellow eyes, black horns and a
+long sinuous tail, perched on a glowing molten rock formation.
+```
+
+`deviantart` for painterly digital-art conventions, `ye-pop` for a broader illustration-stock look. A real style lever for non-anime illustration.
+
+---
+
+## 5. Prompt weighting
+
+Works, but needs **much heavier weights than SDXL**. The card's own example is `(chibi:2)`. If you are used to `(thing:1.2)`, that is close to a no-op here. Start at 1.5.
+
+---
+
