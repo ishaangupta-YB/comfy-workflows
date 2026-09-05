@@ -101,3 +101,19 @@ Add targeted terms to suppress recurring artifacts you actually see.
 
 ---
 
+## 6. Resolution types
+
+Target **~1 megapixel**. Good width×height pairs (all near 1 MP, dimensions are multiples of 8/16):
+
+| Aspect | Dimensions | Use |
+|---|---|---|
+| 1:1 square | **1024 × 1024** | icons, single subjects, food/objects |
+| 2:3 portrait | **832 × 1216** | character portraits, standing figures |
+| 3:2 landscape | **1216 × 832** | scenery, group shots, action |
+| 3:4 / 4:3 | 896 × 1152 / 1152 × 896 | gentler portrait/landscape |
+| 9:16 / 16:9 | 768 × 1344 / 1344 × 768 | tall/wide cinematic |
+
+Going above ~1.3 MP tends to introduce duplication and incoherence. For bigger final images, generate at ~1 MP and upscale as a separate step.
+
+---
+
