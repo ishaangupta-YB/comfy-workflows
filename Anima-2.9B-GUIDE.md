@@ -117,3 +117,18 @@ Going above ~1.3 MP tends to introduce duplication and incoherence. For bigger f
 
 ---
 
+## 7. Running it
+
+### A. In the ComfyUI UI (interactive)
+```bash
+cd /Users/ishaan/Desktop/comfy/ComfyUI && source venv/bin/activate && export PYTORCH_ENABLE_MPS_FALLBACK=1 && comfy launch
+```
+Open **http://127.0.0.1:8188** → **Workflows** sidebar → **Anima-2.9B**. The front node exposes the **positive prompt**, width, height, steps, cfg, seed, and the three model dropdowns. The **negative prompt** and **sampler/scheduler** live *inside* the subgraph — double-click the node to edit them. Hit **Queue** (or Cmd/Ctrl+Enter). Images save to `ComfyUI/output/`.
+
+*(Use `comfy launch`, not `python main.py`, so console output — including s/it and loader messages — is captured to `user/comfyui_8188.log`.)*
+
+### B. Scripted / batch (headless API)
+ComfyUI exposes an HTTP API on the same port: `POST /prompt` with a graph in API format, poll `GET /history/<id>`, images land in `output/`. The batch that produced this folder's images (`anima_batch.py`) does exactly this — it's a useful template for programmatic runs (edit the `PROMPTS` list and re-run).
+
+---
+
