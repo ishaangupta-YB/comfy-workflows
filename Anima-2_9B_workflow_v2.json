@@ -170,7 +170,7 @@
    "title": "Anima-2.9B checklist",
    "properties": {},
    "widgets_values": [
-    "## Before you trust any output\n\n**1. ComfyUI must be >= v0.33.1.**\nOlder builds hardcode 28 blocks for Anima and load the\n40-block file with `strict=False`. No error. 12 layers\njust missing. Check the console says 40 blocks.\n\n**2. `weight_dtype` is set to fp16.**\nRoughly 1.7x faster than fp32. If you get black images,\nput it back to `default`.\n\n## What changed from v1\n\n- scheduler `simple` -> `sgm_uniform` (`simple` is not on\n  the recommended list for this model)\n- CFG 4.0 -> 4.5\n- negative prompt rewritten with real Danbooru tags.\n  `bad hands` / `fewer digits` are SD1.5 folklore, they\n  are not Danbooru tags and do nothing here\n- positive prompt: removed the \"no change to...\", \"no\n  additional elements...\" clauses. Positive-prompt\n  negation does not work and can summon what you exclude\n- added year/period tags (`newest, year 2025`)\n- LoRA loader, bypassed. Ctrl+B to enable\n- hires pass, bypassed. Ctrl+B both nodes to enable\n\n## LoRA warning\n\nA LoRA trained on 28-block Anima-Base loads here with\nZERO warnings and lands 26 of 28 blocks on the wrong\nlayer. You get a different character, not an error.\nRemap the keys first, or install\n`ComfyUI-Anima2.9B-LoraPatcher`.\n\n## Fast iteration\n\nTurbo LoRA at 8 steps, CFG 1.0, er_sde/simple is about\n6x faster. Use it to find the prompt, then switch back."
+    "## Before you trust any output\n\n**1. ComfyUI must be >= v0.33.1.**\nOlder builds hardcode 28 blocks for Anima and load the\n40-block file with `strict=False`. No error. 12 layers\njust missing. Check the console says 40 blocks.\n\n**2. `weight_dtype` = `default` (native bf16).**\nUNETLoader only offers default / fp8_*. `fp16` is NOT a\nvalid option here and fails to run - keep `default`.\n\n## What changed from v1\n\n- scheduler `simple` -> `sgm_uniform` (`simple` is not on\n  the recommended list for this model)\n- CFG 4.0 -> 4.5\n- negative prompt rewritten with real Danbooru tags.\n  `bad hands` / `fewer digits` are SD1.5 folklore, they\n  are not Danbooru tags and do nothing here\n- positive prompt: removed the \"no change to...\", \"no\n  additional elements...\" clauses. Positive-prompt\n  negation does not work and can summon what you exclude\n- added year/period tags (`newest, year 2025`)\n- LoRA loader, bypassed. Ctrl+B to enable\n- hires pass, bypassed. Ctrl+B both nodes to enable\n\n## LoRA warning\n\nA LoRA trained on 28-block Anima-Base loads here with\nZERO warnings and lands 26 of 28 blocks on the wrong\nlayer. You get a different character, not an error.\nRemap the keys first, or install\n`ComfyUI-Anima2.9B-LoraPatcher`.\n\n## Fast iteration\n\nTurbo LoRA at 8 steps, CFG 1.0, er_sde/simple is about\n6x faster. Use it to find the prompt, then switch back."
    ]
   }
  ],
@@ -848,7 +848,7 @@
       },
       "widgets_values": [
        "Anima-2.9B-preview-v1.safetensors",
-       "fp16"
+       "default"
       ]
      },
      {
