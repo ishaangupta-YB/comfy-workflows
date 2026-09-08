@@ -149,3 +149,27 @@ Works, but needs **much heavier weights than SDXL**. The card's own example is `
 
 ---
 
+## 6. Negative prompts
+
+Official Base recommendation:
+
+```
+worst quality, low quality, score_1, score_2, score_3, artist name, blurry,
+jpeg artifacts, chromatic aberration
+```
+
+For 2.9B, drop the score tags and add safety tags:
+
+```
+worst quality, low quality, lowres, jpeg artifacts, chromatic aberration,
+signature, artist name, watermark, username, text,
+bad anatomy, extra digits, missing finger,
+nsfw, sensitive, explicit
+```
+
+`bad anatomy`, `extra digits` and `missing finger` **are** real Danbooru tags, so they belong. The rest of the usual copy-paste block does not.
+
+A negative prompt is not a wishlist. Every token competes for conditioning. Ten chosen tags beat forty scraped off a Civitai post.
+
+---
+
