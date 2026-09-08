@@ -173,3 +173,17 @@ A negative prompt is not a wishlist. Every token competes for conditioning. Ten 
 
 ---
 
+## 7. What does not work
+
+**Negation inside the positive prompt.** "no additional elements", "no change to the framing", "without a background" suppress nothing. Diffusion conditioning has no logical NOT. Worse, the tokens for the thing you are excluding are now in your positive conditioning, so you can summon exactly what you were trying to avoid. Exclusions go in the negative, as plain tags.
+
+**Invented tags.** If it is not on Danbooru or Gelbooru, the model never associated it with anything. Check before you use it.
+
+**SDXL-scale weights.** See section 5.
+
+**Realism.** Explicitly out of scope. The card says the model will not work well at realism, by design. There is a community 2.9B finetune (`addansee/Anima-2.9B-RealAddn`, 2100 real photos) if you need it.
+
+**Long text rendering.** Single words sometimes, short phrases occasionally, sentences no.
+
+---
+
