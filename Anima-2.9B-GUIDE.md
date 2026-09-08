@@ -132,3 +132,11 @@ ComfyUI exposes an HTTP API on the same port: `POST /prompt` with a graph in API
 
 ---
 
+## 8. How to test / iterate (methodology)
+
+- **Change one axis at a time**, with the **seed fixed**, or results are uninterpretable. Want to compare styles? Fix seed + settings, vary only the prompt (that's how this folder's set was made — seed 12345 throughout). Want to tune CFG? Fix everything else.
+- **Fast loop:** drop steps to ~12–16 and/or resolution to 512×768 to preview composition in ~1 min, then re-run the keeper at full steps.
+- **⚠️ Do NOT use a Turbo/LCM LoRA to speed up this model.** The only Anima turbo LoRA (`anima-turbo-lora-v0.2`) was trained on **28-block Anima-Base**. On this **40-block** model it lands on the wrong layers and fails **silently** — no error, plausible-looking garbage. Keep `models/loras/` empty. For speed, lower steps instead.
+
+---
+
