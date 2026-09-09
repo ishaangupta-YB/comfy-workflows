@@ -140,3 +140,12 @@ ComfyUI exposes an HTTP API on the same port: `POST /prompt` with a graph in API
 
 ---
 
+## 9. Troubleshooting & gotchas (all verified on this install)
+
+- **The silent block-count trap (the big one).** Old ComfyUI builds could hardcode a 28-block model for this architecture, load the 40-block weights with `strict=False`, throw **no error**, and generate with 12 layers missing → plausible-looking garbage. **Fixed in v0.33.1** (PR #15555), which derives the count from the state dict. This install is **0.34.0**, and the file correctly trips the *Cosmos-Predict2* detection branch (`model_detection.py:872`, derived count = **40**), not the hardcoded Cosmos-1 branch. If you ever run on an older/Desktop build, verify the load log says **40 blocks** before trusting output.
+- **Benign warning — ignore it:** `unet unexpected: ['pos_embedder.dim_spatial_range', 'pos_embedder.dim_temporal_range', 'pos_embedder.seq']`. These are *extra* RoPE metadata buffers with no slot in the model. *Unexpected* keys are harmless; *missing* keys would be the alarm.
+- **Skip the int8 build on Mac.** `Anima-2.9B-preview-v1_int8_convrot.safetensors` (3.08 GB) loads on MPS then dies in the first KSampler matmul: `NotImplementedError: aten::_int_mm not implemented for MPS`. You have 24 GB — use bf16, there's nothing to gain.
+- **MPS fallback:** always `export PYTORCH_ENABLE_MPS_FALLBACK=1` before launching, so any op without an MPS kernel falls back to CPU instead of crashing.
+
+---
+
