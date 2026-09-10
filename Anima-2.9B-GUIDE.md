@@ -149,3 +149,15 @@ ComfyUI exposes an HTTP API on the same port: `POST /prompt` with a graph in API
 
 ---
 
+## 10. Local vs cloud
+
+The Mac works and is great for correctness checks and offline iteration, but ~3–6 min/image is slow for volume. A single **L4 / A10G** does 28 steps in under 15 s. If you scale up: run ComfyUI headless on the GPU box with `--listen`, tunnel the port, and drive it from the Mac's browser. Use local MPS for validation, cloud for throughput.
+
+---
+
+## 11. Licensing (resolve before any commercial/client use)
+
+The chain is: **Cosmos-Predict2 (NVIDIA Open Model License)** → **CircleStone Labs Anima (non-commercial terms)** → **Gazingstars123 community build**. Non-commercial restrictions and NVIDIA license both propagate downward, and the community build adds its own uncertainty. Read the full chain and confirm rights before using outputs commercially or for a client. This guide is not legal advice.
+
+---
+
