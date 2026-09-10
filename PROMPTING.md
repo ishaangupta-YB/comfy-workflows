@@ -187,3 +187,38 @@ A negative prompt is not a wishlist. Every token competes for conditioning. Ten 
 
 ---
 
+## 8. Generation settings
+
+### Anima-2.9B, from the card
+
+| Setting | Values |
+|---|---|
+| Sampler | `euler`, `res_multistep`, `er_sde` |
+| Scheduler | `sgm_uniform`, `beta`, `beta57`, `linear_quadratic` |
+| Resolution | 832x1216, 1152x1536, 1536x1536 (author calls the last one iffy) |
+| Steps | 28 to 50 |
+| CFG | 3.5 to 5 |
+
+The author's own default is `euler` + `sgm_uniform`, described as a good balance of composition and fine detail. `res_multistep` + `linear_quadratic` spends more time in high-noise steps and visibly improves composition. 50 steps is the author's quality pick. CFG 3.5 beats 5 on some prompts and loses on others, so test both.
+
+`simple` and `normal` are not on the list. They will produce an image, just not the one the model was tuned for.
+
+### Sampler personalities, from the Base card
+
+| Sampler | Character |
+|---|---|
+| `er_sde` | Neutral, flat colors, sharp lines. Reasonable default. |
+| `euler_a` | Softer thinner lines, sometimes 2.5D. Tolerates higher CFG without burning. |
+| `dpmpp_2m_sde_gpu` | Like er_sde but more varied, sometimes too wild. |
+| `euler` | More creative than er_sde. Good with Turbo and Aesthetic. |
+
+`beta57` (RES4LYF node pack) weights low-noise timesteps more heavily, which gives better texture for painterly work.
+
+### Resolution
+
+512² to 1536² supported. About 70% of 2.9B's compute went to 1024px, so near 1MP is where it is strongest. Above 1536² it degrades.
+
+For high resolution, use two passes rather than generating large directly: full-denoise at 832x1216, latent upscale 1.5x, second pass at denoise 0.40 to 0.50 with fewer steps. That chain is in the v2 workflow, bypassed by default.
+
+---
+
