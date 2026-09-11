@@ -222,3 +222,63 @@ For high resolution, use two passes rather than generating large directly: full-
 
 ---
 
+## 9. Debugging
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| Bland flat background | Prompt too short. 2.9B specific. | Add scene, lighting, background. Prose helps. |
+| Looks dated | No period tag | Add `newest, year 2025` |
+| Flat shading, thin shadows on 2.9B | The 12 new blocks | Add an `@artist` tag. CFG will not fix it. |
+| Artist style not applying | Missing `@` | `@artist name` |
+| Wrong character | Missing series tag, or the tag does not exist | Pair character with series, verify on Danbooru |
+| Multi-character attribute bleed | Names without descriptions | Describe each one's appearance |
+| Weight does nothing | SDXL-scale weight | Go to 1.5 or 2.0 |
+| Unwanted NSFW | Short prompt, no safety tags | `safe` positive, `nsfw, sensitive, explicit` negative |
+| Broken or noisy output on 2.9B | ComfyUI below v0.33.1 truncating to 28 blocks | Upgrade or install the blocks patch |
+| LoRA loads clean but wrong character | 28-block LoRA on a 40-block model | Remap the keys |
+
+---
+
+## 10. Templates
+
+### Character, tag mode
+
+```
+masterpiece, best quality, newest, year 2025, absurdres, safe,
+1girl, solo,
+<character>, <series>, @<artist>,
+<hair>, <eyes>, <outfit>,
+<expression>, <pose>, <framing>,
+<background>, <lighting>
+```
+
+### Scene, mixed mode
+
+```
+masterpiece, best quality, newest, absurdres, safe, @<artist>.
+
+<Two to four sentences: the subjects, what each wears and does, the setting,
+the light, the camera angle.>
+
+<comma separated Danbooru tags for anything the prose missed>
+```
+
+### Two characters
+
+```
+masterpiece, best quality, newest, safe, 2girls,
+<char A>, <char B>, <series>, @<artist>.
+
+On the left is <char A>, with <hair>, <eyes>, wearing <outfit>.
+On the right is <char B>, with <hair>, <eyes>, wearing <outfit>.
+They are two different girls. <what they are doing, where, what light>.
+```
+
+The "they are two different girls" line is a community trick that measurably reduces fusion. It works because the text encoder is an actual language model.
+
+---
+
+## Sources
+
+Anima-Base and Anima-2.9B model cards. The M1 Max same-seed comparison and CFG sweep at lilting.ch. Community tagging conventions from the Anima sd-scripts training guide on Civitai.
+
