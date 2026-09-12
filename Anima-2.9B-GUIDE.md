@@ -161,3 +161,25 @@ The chain is: **Cosmos-Predict2 (NVIDIA Open Model License)** → **CircleStone 
 
 ---
 
+## 12. File inventory (this folder)
+
+- `Anima-2.9B.workflow.json` — the exact ComfyUI workflow used (import into ComfyUI to reproduce).
+- `NN_slug.png` — each test image.
+- `NN_slug.txt` — full positive + negative prompt and the complete config for that image.
+- `_manifest.txt` — one line per generation (status, resolution, render time, style family).
+- `_batch.log` — raw batch run log.
+- `Anima-2.9B-GUIDE.md` — this file.
+
+---
+
+### Quick-start cheat sheet
+
+```
+Model:    Anima-2.9B-preview-v1.safetensors (bf16, 40 blocks)
+Encoder:  qwen_3_06b_base.safetensors (Qwen3-0.6B)
+VAE:      qwen_image_vae.safetensors
+Sampler:  er_sde / simple      Steps: 28 (iterate) → 50 (final)      CFG: 4.0
+Res:      1024² | 832×1216 | 1216×832   (~1 MP; don't exceed ~1.3 MP)
+Prompt:   LONG. [quality, safety] [subject count] [character] [series] [@artist] [style + scene, natural language]
+Avoid:    score tags (inert), Turbo LoRA (silently broken), int8 build (MPS-broken), >1.3MP, legible text
+```
