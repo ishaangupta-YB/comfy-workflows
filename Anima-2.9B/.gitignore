@@ -1,0 +1,3 @@
+# Local test-generation outputs — images, prompt/config sidecars, run logs.
+# Kept on disk for reference but NOT version-controlled / pushed.
+generations/
